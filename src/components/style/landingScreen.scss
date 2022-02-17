@@ -14,7 +14,7 @@
   width: 80%;
   max-width: 600px;
   margin: auto;
-  gap: 12px;
+  justify-content: space-evenly;
 }
 
 .male,
@@ -44,6 +44,30 @@
     }
   }
 }
+.maleActive {
+  .paragraphMale,
+  .maleSymbol {
+    color: rgb(0, 102, 255);
+    font-weight: bold;
+  }
+  cursor: pointer;
+  width: 50%;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+}
+.femaleActive {
+  .paragraphFemale,
+  .femaleSymbol {
+    color: rgb(226, 55, 55);
+    font-weight: bold;
+  }
+  cursor: pointer;
+  width: 50%;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+}
 
 .maleSymbol,
 .femaleSymbol {
@@ -55,16 +79,18 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid rgb(79, 201, 193);
-  color: rgb(79, 201, 193);
+  border-bottom: 1px solid rgb(3, 78, 53);
+  color: rgb(3, 78, 53);
   height: 21px;
   max-width: 150px;
   font-size: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
   &:focus {
     font-weight: bold;
     cursor: pointer;
-    border-bottom: 2px solid rgb(79, 201, 193);
-    color: rgb(79, 201, 193);
+    border-bottom: 2px solid rgb(3, 78, 53);
+    color: rgb(3, 78, 53);
     height: 21px;
     max-width: 150px;
     font-size: 80%;
@@ -72,8 +98,8 @@
   &:hover {
     font-weight: bold;
     cursor: pointer;
-    border-bottom: 2px solid rgb(79, 201, 193);
-    color: rgb(79, 201, 193);
+    border-bottom: 2px solid rgb(3, 78, 53);
+    color: rgb(3, 78, 53);
     height: 21px;
     max-width: 150px;
     font-size: 80%;
@@ -106,4 +132,47 @@ input:focus {
     color: rgb(226, 55, 55);
     border-bottom: 2px solid rgb(226, 55, 55);
   }
+  &:active {
+    color: rgb(226, 55, 55);
+    border-bottom: 2px solid rgb(226, 55, 55);
+  }
+}
+
+.inputWrapp {
+  border: 1px solid gray;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 10px 8px #888888;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: auto;
+  width: 80%;
+  margin-top: 5%;
+}
+
+.buttonWrapper {
+  width: 200px;
+  height: 30px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.buttonCalculate {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 10px 8px #888888;
+  width: 200px;
+  height: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.inputResult {
+  margin: 20px 0;
+  height: 20px;
+  border: 1px solid gray;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 10px 8px #888888;
+  text-decoration: solid;
+  font-weight: bold;
+  text-align: center;
 }
