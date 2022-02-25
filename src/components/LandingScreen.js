@@ -13,6 +13,10 @@ export default class LandingScreen extends Component {
       weight: "",
       age: "",
       result: "",
+      isNormal: false,
+      isOverweight: false,
+      isUnderweight: false,
+      unvalid: false,
     };
   }
   onClickMale = () => {
@@ -28,14 +32,70 @@ export default class LandingScreen extends Component {
     });
   };
   onClickCalculate = () => {
-    let { male, female, height, weight, age, result } = this.state;
+    let {
+      isUnderweight,
+      isNormal,
+      isOverweight,
+      height,
+      weight,
+      age,
+      result,
+      isFemale,
+      isMale,
+      unvalid,
+    } = this.state;
     result = weight / Math.pow(height, 2);
-    this.setState({ result: result });
+
+    if (result < 18.5) {
+      this.setState({ isUnderweight: true });
+    } else if (result > 24.9) {
+      this.setState({ isOverweight: true });
+    } else if (result > 18.5 && result < 24.9) {
+      this.setState({ isNormal: true });
+    }
+    if (height !== "" && weight !== "" && age !== "" && (isFemale || isMale)) {
+      this.setState({ unvalid: false });
+      this.setState({ result: result });
+    } else {
+      this.setState({ unvalid: true });
+    }
   };
   render() {
-    const { isMale, isFemale, result } = this.state;
+    const {
+      isMale,
+      isFemale,
+      result,
+      unvalid,
+      isOverweight,
+      isUnderweight,
+      isNormal,
+    } = this.state;
     return (
       <div className="landingWrapper">
+        {unvalid ? alert("Please fill in all fields") : null}
+        {isUnderweight || isOverweight || isNormal ? (
+          <div className="messagewrapper">
+            <div className="contentWrapper">
+              {isUnderweight && (
+                <div className="message">
+                  You are underweight.
+                  <br /> Your bmi is: {Math.round(result)}
+                </div>
+              )}
+              {isOverweight && (
+                <div className="message">
+                  You are overweight. <br /> Your bmi is: {Math.round(result)}
+                </div>
+              )}
+              {isNormal && (
+                <div className="message">
+                  Your weight is normal. <br /> Your bmi is:{" "}
+                  {Math.round(result)}
+                </div>
+              )}{" "}
+            </div>
+          </div>
+        ) : null}
         <header>
           <h1>BMI calculator</h1>
         </header>
@@ -60,7 +120,7 @@ export default class LandingScreen extends Component {
           </div>
           <div className="inputWrapp">
             <div className="chooseHeight">
-              <label for="inputHeight">Height (m)</label> <br />
+              <label htmlFor="inputHeight">Height (m)</label> <br />
               <input
                 id="inputHeight"
                 type="number"
@@ -78,7 +138,7 @@ export default class LandingScreen extends Component {
             </div>
 
             <div className="chooseWeight">
-              <label for="inputWeight">Weight (kg)</label> <br />
+              <label htmlFor="inputWeight">Weight (kg)</label> <br />
               <input
                 id="inputWeight"
                 type="number"
@@ -95,7 +155,7 @@ export default class LandingScreen extends Component {
               ></input>
             </div>
             <div className="chooseAge">
-              <label for="inputAge">Age</label> <br />
+              <label htmlFor="inputAge">Age</label> <br />
               <input
                 id="inputAge"
                 type="number"
@@ -119,7 +179,7 @@ export default class LandingScreen extends Component {
               Your bmi is:
               <input
                 className="inputResult"
-                value={Math.round(result)}
+                value={result == "" || result == NaN ? "" : Math.round(result)}
                 readOnly
               />
             </div>
