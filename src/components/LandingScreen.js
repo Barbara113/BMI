@@ -40,7 +40,7 @@ export default class LandingScreen extends Component {
       this.setState({ isUnderweight: true });
     } else if (result > 24.9) {
       this.setState({ isOverweight: true });
-    } else if (result > 18.5 && result < 24.9) {
+    } else if (result >= 18.5 && result <= 24.9) {
       this.setState({ isNormal: true });
     }
     if (height !== "" && weight !== "" && age !== "" && (isFemale || isMale)) {
