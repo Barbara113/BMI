@@ -17,6 +17,7 @@ export default class LandingScreen extends Component {
       isOverweight: false,
       isUnderweight: false,
       unvalid: false,
+      messageVisible: false,
     };
   }
   onClickMale = () => {
@@ -32,18 +33,7 @@ export default class LandingScreen extends Component {
     });
   };
   onClickCalculate = () => {
-    let {
-      isUnderweight,
-      isNormal,
-      isOverweight,
-      height,
-      weight,
-      age,
-      result,
-      isFemale,
-      isMale,
-      unvalid,
-    } = this.state;
+    let { height, weight, age, result, isFemale, isMale } = this.state;
     result = weight / Math.pow(height, 2);
 
     if (result < 18.5) {
@@ -55,10 +45,15 @@ export default class LandingScreen extends Component {
     }
     if (height !== "" && weight !== "" && age !== "" && (isFemale || isMale)) {
       this.setState({ unvalid: false });
-      this.setState({ result: result });
+      this.setState({ result: result, messageVisible: true });
     } else {
+      alert("Please fill in all fields");
       this.setState({ unvalid: true });
     }
+  };
+
+  onClickMessage = () => {
+    this.setState({ messageVisible: !this.state.messageVisible });
   };
   render() {
     const {
@@ -69,11 +64,12 @@ export default class LandingScreen extends Component {
       isOverweight,
       isUnderweight,
       isNormal,
+      messageVisible,
     } = this.state;
+    console.log("unvalid", unvalid);
     return (
       <div className="landingWrapper">
-        {unvalid ? alert("Please fill in all fields") : null}
-        {isUnderweight || isOverweight || isNormal ? (
+        {messageVisible ? (
           <div className="messagewrapper">
             <div className="contentWrapper">
               {isUnderweight && (
@@ -93,6 +89,9 @@ export default class LandingScreen extends Component {
                   {Math.round(result)}
                 </div>
               )}{" "}
+              <div className="exitbutton" onClick={this.onClickMessage}>
+                X
+              </div>
             </div>
           </div>
         ) : null}
@@ -175,14 +174,6 @@ export default class LandingScreen extends Component {
         </main>
         <footer>
           <div className="buttonWrapper">
-            <div>
-              Your bmi is:
-              <input
-                className="inputResult"
-                value={result == "" || result == NaN ? "" : Math.round(result)}
-                readOnly
-              />
-            </div>
             <button className="buttonCalculate" onClick={this.onClickCalculate}>
               Calculate
             </button>

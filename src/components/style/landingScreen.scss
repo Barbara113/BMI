@@ -157,12 +157,34 @@ input:focus {
 }
 
 .buttonCalculate {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.6);
   box-shadow: 5px 10px 8px #888888;
   width: 200px;
-  height: 30px;
+  height: 45px;
+  font-size: large;
   &:hover {
     cursor: pointer;
+    // background: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(
+      105deg,
+      rgb(20, 89, 216),
+      rgb(143, 78, 228),
+      rgb(117, 150, 211),
+      rgb(110, 74, 207),
+      rgb(50, 93, 231)
+    );
+    background-size: 200% 200%;
+    animation: rainbow 1.5s alternate infinite;
+    color: white;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
   }
 }
 
@@ -199,4 +221,12 @@ input:focus {
 .message {
   margin: auto;
   font-size: 22px;
+}
+
+.exitbutton {
+  margin-right: 8px;
+  font-size: 20px;
+  &:hover {
+    cursor: pointer;
+  }
 }
